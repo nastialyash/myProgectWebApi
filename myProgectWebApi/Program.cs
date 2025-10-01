@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using myProgectWebApi.DAL;
+using myProgectWebApi.DAL.DTOs;
 using myProgectWebApi.DAL.Repositories;
+using myProgectWebApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +20,15 @@ builder.Services.AddDbContext<GameDbContext>(options =>
 builder.Services.AddScoped<IGameRepository, GameRepository>();
 
 
+builder.Services.AddScoped<IUserService, UserService>();
 
+
+builder.Configuration.AddInMemoryCollection(new Dictionary<string, string>
+{
+    { "Jwt:Key", "super_secret_key_123!" },
+    { "Jwt:Issuer", "GameApi" },
+    { "Jwt:Audience", "GameApiUsers" }
+});
 
 
 

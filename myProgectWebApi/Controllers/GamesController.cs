@@ -25,23 +25,23 @@ namespace myProgectWebApi.Controllers
             [HttpGet]
             public async Task<IActionResult> GetAll()
             {
-                var games = await _service.GetAllAsync();
-                return Ok(games);
+                var response = await _service.GetAllAsync();
+                return Ok(response);
             }
 
             [HttpGet("{id}")]
             public async Task<IActionResult> GetById(int id)
             {
-                var game = await _service.GetByIdAsync(id);
-                if (game == null) return NotFound();
-                return Ok(game);
+                var response = await _service.GetByIdAsync(id);
+                if (response == null) return NotFound();
+                return Ok(response);
             }
 
             [HttpGet("genre/{genre}")]
             public async Task<IActionResult> GetByGenre(string genre)
             {
-                var games = await _service.GetByGenreAsync(genre);
-                return Ok(games);
+                var response = await _service.GetByGenreAsync(genre);
+                return Ok(response);
             }
 
             [HttpPost]
@@ -49,8 +49,8 @@ namespace myProgectWebApi.Controllers
             {
                 var game = new Game { Genre = dto.Genre, Name = dto.Name, ReleaseDate=dto.ReleaseDate,Price = dto.Price,Id=dto.Id  };
                 
-           var created= _service.CreateAsync(game);
-                return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
+           var response = _service.CreateAsync(game);
+                return CreatedAtAction(nameof(GetById), new { id = response.Id }, response);
             }
 
             [HttpPut("{id}")]
@@ -59,16 +59,16 @@ namespace myProgectWebApi.Controllers
                 if (id != dto.Id) return BadRequest();
                 var game = new Game { Genre = dto.Genre, Name = dto.Name, ReleaseDate = dto.ReleaseDate, Price = dto.Price, Id = dto.Id };
 
-                var created = await _service.UpdateAsync(game);
-                if (created == null) return NotFound();
-                return Ok(created);
+                var response = await _service.UpdateAsync(game);
+                if (response == null) return NotFound();
+                return Ok(response);
 
             }
             [HttpDelete("{id}")]
             public async Task<IActionResult> Delete(int id)
             {
-                var deleted = await _service.DeleteAsync(id);
-                if (!deleted) return NotFound();
+                var response = await _service.DeleteAsync(id);
+                if (!response) return NotFound();
                 return NoContent();
             }
             [HttpGet("category/{category}")]
