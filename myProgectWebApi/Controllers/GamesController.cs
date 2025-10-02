@@ -17,6 +17,7 @@ namespace myProgectWebApi.Controllers
         {
             private readonly IGameRepository _service;
 
+
             public GamesController(IGameRepository repository)
             {
                 _service = repository;

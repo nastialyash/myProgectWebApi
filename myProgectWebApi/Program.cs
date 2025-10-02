@@ -31,8 +31,22 @@ builder.Configuration.AddInMemoryCollection(new Dictionary<string, string>
 });
 
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReact",
+        policy => policy.WithOrigins("http://localhost:3000")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod());
+});
+
+
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
+app.UseCors("AllowReact");
+
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
