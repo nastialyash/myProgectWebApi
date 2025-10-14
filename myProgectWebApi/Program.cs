@@ -3,6 +3,7 @@ using myProgectWebApi.DAL;
 using myProgectWebApi.DAL.DTOs;
 using myProgectWebApi.DAL.Repositories;
 using myProgectWebApi.Services;
+using Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,7 +22,7 @@ builder.Services.AddScoped<IGameRepository, GameRepository>();
 
 
 builder.Services.AddScoped<IUserService, UserService>();
-
+builder.Services.AddScoped<IGameService, GameService>();
 
 builder.Configuration.AddInMemoryCollection(new Dictionary<string, string>
 {
