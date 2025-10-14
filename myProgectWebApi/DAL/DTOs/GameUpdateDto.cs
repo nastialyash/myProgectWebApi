@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
-        public string Genre { get; set; } = string.Empty;
+        public List<string> Genre { get; set; } = string.Empty;
         public DateTime ReleaseDate { get; set; }
         public double Price { get; set; }
         public string Title { get; internal set; }
