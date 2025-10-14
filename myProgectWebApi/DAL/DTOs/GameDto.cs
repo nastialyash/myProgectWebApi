@@ -11,5 +11,6 @@
         public double Price { get; set; }
 
         public List<string> ImagePaths { get; set; } 
+        public IFormFileCollection? Images { get; set; }    
     }
 }
