@@ -65,12 +65,38 @@ namespace Services
                 return response;
             }
 
+
             game.Title = dto.Title;
             game.Genre = dto.Genre;
             game.Description = dto.Description;
             game.Price = dto.Price;
 
             await _repository.UpdateAsync(game);
+
+         
+            string gameFolder = Path.Combine(_env.WebRootPath ?? "wwwroot", "images", "games", game.Id.ToString());
+
+            
+            if (dto.Images != null && dto.Images.Count > 0)
+            {
+                
+                if (Directory.Exists(gameFolder))
+                {
+                    Directory.Delete(gameFolder, true);
+                }
+
+                Directory.CreateDirectory(gameFolder);
+
+                
+                foreach (var image in dto.Images)
+                {
+                    string filePath = Path.Combine(gameFolder, image.FileName);
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await image.CopyToAsync(stream);
+                    }
+                }
+            }
 
             response.Success = true;
             response.Message = "Game updated successfully";
@@ -85,7 +111,6 @@ namespace Services
 
             return response;
         }
-
 
         public async Task<ServiceResponse<bool>> DeleteAsync(int id)
         {

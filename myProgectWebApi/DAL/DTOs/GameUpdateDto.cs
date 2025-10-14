@@ -9,5 +9,6 @@
         public double Price { get; set; }
         public string Title { get; internal set; }
         public string Description { get; internal set; }
+        public  IFormFileCollection? Images { get; set; }
     }
 }

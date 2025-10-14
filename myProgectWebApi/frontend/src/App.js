@@ -2,7 +2,8 @@
 import RegisterPage from "./pages/RegisterPage";
  import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
     import GamesListPage from "./pages/GamesListPage";
-    import GameDetailsPage from "./pages/GameDetailsPage";
+import GameDetailsPage from "./pages/GameDetailsPage";
+import EditGamePage from "./pages/EditGamePage";
 
 function App() {
     return <RegisterPage />;
@@ -14,6 +15,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<GamesListPage />} />
                     <Route path="/game/:id" element={<GameDetailsPage />} />
+                    <Route path="/games/edit/:id" element={<EditGamePage />} />"
                 </Routes>
             </Router>
         );

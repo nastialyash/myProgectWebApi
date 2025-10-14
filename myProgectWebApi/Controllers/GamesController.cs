@@ -49,5 +49,15 @@ namespace myProjectWebApi.Controllers
                 return NotFound(result.Message);
             return Ok(result.Message);
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, [FromForm] GameUpdateDto dto)
+        {
+            var response = await _service.UpdateAsync(id, dto);
+            if (!response.Success)
+                return NotFound(response.Message);
+
+            return Ok(response.Data);
+        }
     }
 }
